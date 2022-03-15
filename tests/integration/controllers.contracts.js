@@ -36,8 +36,7 @@ describe('contracts.js', () => {
 						{ ContractorId: profileId }
 					]
 				},
-				attributes: ['id'],
-				raw: true
+				attributes: ['id']
 			});
 
 			const { body: contracts } = await request(app)
@@ -48,10 +47,9 @@ describe('contracts.js', () => {
 			const expectedContractIds = expectedProfileContracts.map((c) => c.id);
 			const actualContractIds = contracts.map((c) => c.id);
 
-			assert.isArray(contracts, 'should return Array of requested contracts');
+			assert.isArray(contracts, 'should return array of requested contracts');
 			assert.sameMembers(actualContractIds, expectedContractIds, 'should return expected contracts ids');
 		});
-
 	});
 
 	describe('GET /:id', () => {

@@ -4,11 +4,11 @@ const ArgumentError = require('../errors/ArgumentError');
 const contractStatuses = require('../enums/contractStatuses');
 
 /**
- * Gets single contract if it belongs to a provided profileId
- * @param {Number} id contract id
- * @param {Number} profileId profile id
+ * Gets single Contract if it belongs to a provided profileId
+ * @param {Number} id Contract id
+ * @param {Number} profileId Profile id
  * @return {Promise<Contract>} Contract Promise
- * @throws <ArgumentError> If the contract id or profile id are invalid
+ * @throws <ArgumentError> if the contractId or profileId are invalid
  */
 function getProfileContractById(id, profileId) {
 	if (id === null || id === undefined || profileId === null || profileId === undefined) {
@@ -27,10 +27,10 @@ function getProfileContractById(id, profileId) {
 }
 
 /**
- * Gets all non-terminated contracts that belong to a provided profile id
+ * Gets all non-terminated Contracts that belong to a provided profileId
  * @param {Number} profileId profile id
- * @return {Promise<Contract[]>} Profile contracts Promise
- * @throws <ArgumentError> If the profile id is invalid
+ * @return {Promise<Contract[]>} Profile Contracts Promise
+ * @throws <ArgumentError> if the profileId is invalid
  */
 function getAllActiveProfileContracts(profileId) {
 	if (profileId === null || profileId === undefined) {
@@ -44,8 +44,7 @@ function getAllActiveProfileContracts(profileId) {
 				{ ClientId: profileId },
 				{ ContractorId: profileId }
 			]
-		},
-		raw: true
+		}
 	});
 }
 

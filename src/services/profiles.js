@@ -5,7 +5,7 @@ const ArgumentError = require('../errors/ArgumentError');
  * Gets Profile by id
  * @param {Number} id Profile id
  * @return {Promise<Profile>} Profile Promise
- * @throws <ArgumentError> if the profile id is invalid
+ * @throws <ArgumentError> if the profileId is invalid
  */
 async function getById(id) {
 	if (id === null || id === undefined) {

@@ -6,7 +6,7 @@ const validations = require('./validations/contracts');
 const contractsService = require('../services/contracts');
 
 /**
- * @returns {Array<Contract>} active contracts where requesting Profile is either a Client or a Contractor
+ * @returns {Array<Contract>} active Contracts where requesting Profile is either a Client or a Contractor
  */
 router.get('/', asyncMiddleware(async (req, res) => {
 	const { id } = req.profile;
@@ -16,7 +16,7 @@ router.get('/', asyncMiddleware(async (req, res) => {
 }));
 
 /**
- * @returns {Contract} contract by id if requesting Profile is either a Client or a Contractor
+ * @returns {Contract} Contract by id if requesting Profile is either a Client or a Contractor
  */
 router.get('/:id', validate(validations.getById), asyncMiddleware(async (req, res) => {
 	const { id } = req.params;
