@@ -13,7 +13,7 @@ const BALANCE_PROPERTY_NAME = 'balance';
  * @return {Promise<Job[]>} Unpaid jobs Promise
  * @throws {ArgumentError} if the profileId is invalid
  */
-async function getUnpaidJobs(profileId) {
+function getUnpaidJobs(profileId) {
 	exists(profileId);
 
 	return Job.findAll({
@@ -23,7 +23,7 @@ async function getUnpaidJobs(profileId) {
 		include: {
 			model: Contract,
 			where: {
-				status: { [Op.ne]: contractStatuses.TERMINATED },
+				status: contractStatuses.IN_PROGRESS,
 				[Op.or]: [
 					{ ClientId: profileId },
 					{ ContractorId: profileId }

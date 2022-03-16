@@ -36,7 +36,7 @@ describe('jobs.js', () => {
 				include: {
 					model: Contract,
 					where: {
-						status: { [Op.ne]: contractStatuses.TERMINATED },
+						status: contractStatuses.IN_PROGRESS,
 						[Op.or]: [
 							{ ClientId: profileId },
 							{ ContractorId: profileId }
