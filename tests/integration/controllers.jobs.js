@@ -9,7 +9,7 @@ const contractStatuses = require('../../src/enums/contractStatuses');
 const PROFILE_ID_HEADER = 'profile_id';
 
 describe('jobs.js', () => {
-	describe('GET /', () => {
+	describe('GET /unpaid', () => {
 		it('should be protected from unauthenticated access', () => {
 			return request(app).get('/api/jobs/unpaid').expect(StatusCodes.UNAUTHORIZED);
 		});

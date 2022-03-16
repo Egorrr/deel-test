@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { validate } = require('express-validation');
 const { StatusCodes } = require('http-status-codes');
+const validate = require('../utils/validation');
 const asyncMiddleware = require('../middleware/async');
 const validations = require('./validations/contracts');
 const contractsService = require('../services/contracts');

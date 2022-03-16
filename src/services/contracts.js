@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const { Contract: Contracts } = require('../models/model');
-const ArgumentError = require('../errors/ArgumentError');
 const contractStatuses = require('../enums/contractStatuses');
+const { exists } = require('../utils/contracts');
 
 /**
  * Gets single Contract if it belongs to a provided profileId
@@ -11,9 +11,8 @@ const contractStatuses = require('../enums/contractStatuses');
  * @throws <ArgumentError> if the contractId or profileId are invalid
  */
 function getProfileContractById(id, profileId) {
-	if (id === null || id === undefined || profileId === null || profileId === undefined) {
-		throw new ArgumentError;
-	}
+	exists(id);
+	exists(profileId);
 
 	return Contracts.findOne({
 		where: {
@@ -33,9 +32,7 @@ function getProfileContractById(id, profileId) {
  * @throws <ArgumentError> if the profileId is invalid
  */
 function getAllActiveProfileContracts(profileId) {
-	if (profileId === null || profileId === undefined) {
-		throw new ArgumentError;
-	}
+	exists(profileId)
 
 	return Contracts.findAll({
 		where: {

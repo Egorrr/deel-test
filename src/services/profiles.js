@@ -1,16 +1,14 @@
 const { Profile } = require('../models/model');
-const ArgumentError = require('../errors/ArgumentError');
+const { exists } = require('../utils/contracts');
 
 /**
  * Gets Profile by id
  * @param {Number} id Profile id
  * @return {Promise<Profile>} Profile Promise
- * @throws <ArgumentError> if the profileId is invalid
+ * @throws {ArgumentError} if the profileId is invalid
  */
 async function getById(id) {
-	if (id === null || id === undefined) {
-		throw new ArgumentError;
-	}
+	exists(id);
 
 	return Profile.findByPk(id);
 }
