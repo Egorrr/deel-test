@@ -4,6 +4,9 @@ const { isValidDateRange } = require('../utils/contracts');
 
 /**
  * Gets professions that earned most in the provided date range
+ *
+ * NOTE: Counts partially paid jobs and terminated Contracts along with paid ones as per discussion
+ *
  * @param {Date} startDate Start date
  * @param {Date} endDate End date
  * @param {Number} limit Number of professions taken
@@ -40,6 +43,9 @@ async function getBestProfessionsInDateRange(startDate, endDate, limit = 1) {
 
 /**
  * Gets clients that paid the most for Jobs in provided date range
+ *
+ * NOTE: Counts partially paid jobs and terminated Contracts along with paid ones as per discussion
+ *
  * @param {Date} startDate Start date
  * @param {Date} endDate End date
  * @param {Number} limit Number of Clients taken

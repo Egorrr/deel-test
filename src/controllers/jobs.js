@@ -20,9 +20,11 @@ router.get('/unpaid', asyncMiddleware(async (req, res) => {
 
 /**
  * Performs Job payment processing
- * Assumptions:
- *      1. Only client type Profile can pay for job.
- *      2. Client can only pay for the jobs that he own
+ *
+ * ASSUMPTIONS:
+ *      1. Only client type Profile can pay for Job.
+ *      2. Client can only pay for the Jobs that he own
+ *
  * @returns {undefined}
  */
 router.post('/:jobId/pay', validate(validations.pay), asyncMiddleware(async (req, res) => {

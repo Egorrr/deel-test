@@ -5,6 +5,9 @@ const contractStatuses = require('../enums/contractStatuses');
 
 /**
  * Gets single Contract if it belongs to a provided profileId
+ *
+ * NOTE: Terminated Contract should still be available by id as per discussion
+ *
  * @param {Number} id Contract id
  * @param {Number} profileId Profile id
  * @returns {Promise<Contract>} Contract Promise
@@ -31,7 +34,7 @@ function getProfileContractById(id, profileId) {
  * @returns {Promise<Contract[]>} Profile Contracts Promise
  * @throws <ArgumentError> if the profileId is invalid
  */
-function getAllActiveProfileContracts(profileId) {
+function getAllNonTerminatedProfileContracts(profileId) {
 	exists(profileId);
 
 	return Contract.findAll({
@@ -47,5 +50,5 @@ function getAllActiveProfileContracts(profileId) {
 
 module.exports = {
 	getProfileContractById,
-	getAllActiveProfileContracts
+	getAllNonTerminatedProfileContracts
 };

@@ -8,6 +8,14 @@ const profileTypes = require('../enums/profileTypes');
 
 /**
  * Deposits money into the balance of a client, a client can't deposit more than 25% his total of jobs to pay
+ *
+ * ASSUMPTION:
+ *      1. Only client type Profile can deposit money
+ *      2. Client can only deposit on his account
+ *
+ *  NOTE: A weird requirement regarding 25%, can't think of a business meaning of it,
+ *  as per discussion it should be implemented the way it's described in README
+ *
  * @returns {undefined}
  */
 router.post('/deposit/:userId', validate(validations.deposit), asyncMiddleware(async (req, res) => {

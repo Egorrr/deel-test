@@ -6,16 +6,18 @@ const validations = require('./validations/contracts');
 const contractsService = require('../services/contracts');
 
 /**
- * @returns {Array<Contract>} active Contracts where requesting Profile is either a Client or a Contractor
+ * @returns {Array<Contract>} non terminated Contracts where requesting Profile is either a Client or a Contractor
  */
 router.get('/', asyncMiddleware(async (req, res) => {
 	const { id } = req.profile;
-	const profileContracts = await contractsService.getAllActiveProfileContracts(id);
+	const profileContracts = await contractsService.getAllNonTerminatedProfileContracts(id);
 
 	res.send(profileContracts);
 }));
 
 /**
+ * NOTE: Terminated Contract should still be available by id as per discussion
+ *
  * @returns {Contract} Contract by id if requesting Profile is either a Client or a Contractor
  */
 router.get('/:id', validate(validations.getById), asyncMiddleware(async (req, res) => {

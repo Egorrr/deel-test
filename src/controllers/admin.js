@@ -6,6 +6,8 @@ const asyncMiddleware = require('../middleware/async');
 const statisticsService = require('../services/statistics');
 
 /**
+ * NOTE: Counts partially paid jobs and terminated Contracts along with paid ones as per discussion
+ *
  * @returns {Object} profession that earned the most money for any contactor that worked in the provided date range
  */
 router.get('/best-profession', validate(validations.getBestProfession), asyncMiddleware(async (req, res) => {
@@ -21,6 +23,8 @@ router.get('/best-profession', validate(validations.getBestProfession), asyncMid
 }));
 
 /**
+ * NOTE: Counts partially paid jobs and terminated Contracts along with paid ones as per discussion
+ *
  * @returns {Object[]} clients the paid the most for Jobs in the provided date range
  */
 router.get('/best-clients', validate(validations.getBestPayingClients), asyncMiddleware(async (req, res) => {
