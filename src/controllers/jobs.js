@@ -23,8 +23,9 @@ router.get('/unpaid', asyncMiddleware(async (req, res) => {
  */
 router.post('/:jobId/pay', validate(validations.pay), asyncMiddleware(async (req, res) => {
 	const { jobId } = req.params;
+	const { id: profileId } = req.profile;
 
-	await jobsService.payForJob(jobId);
+	await jobsService.payForJob(jobId, profileId);
 
 	res.sendStatus(StatusCodes.OK);
 }));

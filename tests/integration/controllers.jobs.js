@@ -77,6 +77,16 @@ describe('jobs.js', () => {
 				.expect(StatusCodes.BAD_REQUEST);
 		});
 
+		it('should not allow to modify Jobs that are not related to profile', () => {
+			const jobId = 2;
+			const profileId = 2;
+
+			return request(app)
+				.post(`/api/jobs/${jobId}/pay`)
+				.set(PROFILE_ID_HEADER, profileId)
+				.expect(StatusCodes.UNAUTHORIZED);
+		});
+
 		it('should not allow to pay for already paid jobs', () => {
 			const paidJobId = 6;
 			const profileId = 2;

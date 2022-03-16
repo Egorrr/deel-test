@@ -7,7 +7,8 @@ const DEFAULT_ERROR_STATUS = StatusCodes.INTERNAL_SERVER_ERROR;
 const ERRORS_HTTP_STATUS_MAP = Object.freeze({
 	ValidationError: StatusCodes.BAD_REQUEST,
 	NotFoundError: StatusCodes.NOT_FOUND,
-	ConflictError: StatusCodes.CONFLICT
+	ConflictError: StatusCodes.CONFLICT,
+	UnauthorizedError: StatusCodes.UNAUTHORIZED
 });
 
 /**

@@ -38,11 +38,12 @@ function getUnpaidJobs(profileId) {
 /**
  * Performs Job payment processing
  * @param {Number} jobId Job id
+ * @param {Number} profileId Profile id
  * @return {Promise} Payment processing Promise
  * @throws {ArgumentError} if the jobId is invalid
  * @throws {ConflictError} if Job payment cannot be performed
  */
-async function payForJob(jobId) {
+async function payForJob(jobId, profileId) {
 	exists(jobId);
 
 	let transaction = await sequelize.transaction();
@@ -75,6 +76,10 @@ async function payForJob(jobId) {
 
 		const jobPrice = job.price;
 		const { Client: client, Contractor: contractor } = job.Contract;
+
+		if (client.id !== profileId) {
+			throw new UnauthorizedError(`User is not allowed to update this entity`);
+		}
 
 		if (client.balance < jobPrice) {
 			throw new ConflictError('Not enough money');
