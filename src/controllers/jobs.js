@@ -35,7 +35,7 @@ router.post('/:jobId/pay', validate(validations.pay), asyncMiddleware(async (req
 
 	await jobsService.payForJob(jobId, profileId);
 
-	res.sendStatus(StatusCodes.OK);
+	return res.sendStatus(StatusCodes.OK);
 }));
 
 module.exports = router;

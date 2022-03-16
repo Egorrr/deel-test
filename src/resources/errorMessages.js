@@ -4,5 +4,5 @@ module.exports = Object.freeze({
 	BAD_REQUEST: 'You can not perform this operation.',
 	UNAUTHORIZED: 'The request requires user authentication.',
 	NOT_FOUND: 'The server has not found anything matching the request.',
-	CONFLICT: 'Conflict occurred while performing the operation.',
+	CONFLICT: 'Conflict occurred while performing the operation.'
 });

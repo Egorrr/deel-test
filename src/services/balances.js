@@ -10,14 +10,14 @@ const DEBT_MAX_AMOUNT_MULTIPLIER = 0.25;
  * A weird requirement, can't think of a business meaning of it, was told that it should be implemented anyway
  * @param {Number} profileId Profile id
  * @param {Number} amount deposit amount
- * @return {Promise<Object>} Deposit result Promise
+ * @returns {Promise<Object>} Deposit result Promise
  * @throws <ArgumentError> if the profileId or amount are invalid
  */
 async function depositMoney(profileId, amount) {
 	exists(profileId);
 	isPositiveNumber(amount);
 
-	let transaction = await sequelize.transaction();
+	const transaction = await sequelize.transaction();
 
 	try {
 		const currentDebt = await jobsService.getUnpaidJobsTotalAmount(profileId, transaction);

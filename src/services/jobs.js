@@ -11,7 +11,7 @@ const BALANCE_PROPERTY_NAME = 'balance';
 /**
  * Gets unpaid Jobs for non-terminated Contracts that belong to a provided profileId
  * @param {Number} profileId Profile id
- * @return {Promise<Job[]>} Unpaid jobs Promise
+ * @returns {Promise<Job[]>} Unpaid jobs Promise
  * @throws {ArgumentError} if the profileId is invalid
  */
 function getUnpaidJobs(profileId) {
@@ -40,16 +40,16 @@ function getUnpaidJobs(profileId) {
  * Gets total amount of prices for all profile unpaid jobs as a client
  * @param {Number} clientId Client id
  * @param {transaction} transaction Transaction
- * @return {Promise<Number>} Profile total debt
+ * @returns {Promise<Number>} Profile total debt
  */
-function getUnpaidJobsTotalAmount(clientId, transaction){
+function getUnpaidJobsTotalAmount(clientId, transaction) {
 	return Job.sum('price', {
 		include: {
 			model: Contract,
 			where: {
 				status: contractStatuses.IN_PROGRESS,
 				[Op.or]: [
-					{ ClientId: clientId },
+					{ ClientId: clientId }
 				]
 			},
 			required: true,
@@ -63,29 +63,26 @@ function getUnpaidJobsTotalAmount(clientId, transaction){
  * Performs Job payment processing
  * @param {Number} jobId Job id
  * @param {Number} profileId Profile id
- * @return {Promise} Payment processing Promise
+ * @returns {Promise} Payment processing Promise
  * @throws {ArgumentError} if the jobId is invalid
  * @throws {ConflictError} if Job payment cannot be performed
  */
 async function payForJob(jobId, profileId) {
 	exists(jobId);
 
-	let transaction = await sequelize.transaction();
+	const transaction = await sequelize.transaction();
 
 	try {
 		const job = await Job.findByPk(jobId, {
 			include: {
 				model: Contract,
-				include: [
-					{
+				include: [{
 						model: Profile,
 						as: 'Client'
-					},
-					{
+				}, {
 						model: Profile,
 						as: 'Contractor'
-					}
-				]
+				}]
 			},
 			transaction
 		});
@@ -102,7 +99,7 @@ async function payForJob(jobId, profileId) {
 		const { Client: client, Contractor: contractor } = job.Contract;
 
 		if (client.id !== profileId) {
-			throw new UnauthorizedError(`User is not allowed to update this entity`);
+			throw new UnauthorizedError('User is not allowed to update this entity');
 		}
 
 		if (client.balance < jobPrice) {

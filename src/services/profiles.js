@@ -4,7 +4,7 @@ const { exists } = require('../utils/contracts');
 /**
  * Gets Profile by id
  * @param {Number} id Profile id
- * @return {Promise<Profile>} Profile Promise
+ * @returns {Promise<Profile>} Profile Promise
  * @throws {ArgumentError} if the profileId is invalid
  */
 async function getById(id) {

@@ -67,7 +67,7 @@ describe('contracts.js', () => {
 				.expect(StatusCodes.BAD_REQUEST);
 		});
 
-		it(`should not allow to request contract that don't belong to profile`, async () => {
+		it('should not allow to request contract that don\'t belong to profile', async () => {
 			const contractId = 1;
 			const profileId = 8;
 

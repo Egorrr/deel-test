@@ -7,6 +7,6 @@ module.exports = (middleware) => async (req, res, next) => {
 	try {
 		return await middleware(req, res, next);
 	} catch (e) {
-		next(e);
+		return next(e);
 	}
 };

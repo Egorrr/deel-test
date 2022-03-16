@@ -27,7 +27,7 @@ router.get('/:id', validate(validations.getById), asyncMiddleware(async (req, re
 		return res.sendStatus(StatusCodes.NOT_FOUND);
 	}
 
-	res.send(contract);
+	return res.send(contract);
 }));
 
 module.exports = router;

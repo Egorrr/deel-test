@@ -21,7 +21,7 @@ router.post('/deposit/:userId', validate(validations.deposit), asyncMiddleware(a
 
 	const result = await balancesService.depositMoney(userId, amount);
 
-	res.send(result);
+	return res.send(result);
 }));
 
 module.exports = router;

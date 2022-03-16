@@ -1,5 +1,5 @@
-const HttpError = require('./HttpError');
 const { StatusCodes } = require('http-status-codes');
+const HttpError = require('./HttpError');
 const errorMessages = require('../resources/errorMessages');
 
 module.exports = {

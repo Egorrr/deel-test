@@ -7,7 +7,7 @@ const { isValidDateRange } = require('../utils/contracts');
  * @param {Date} startDate Start date
  * @param {Date} endDate End date
  * @param {Number} limit Number of professions taken
- * @return {Promise<Object[]>} Best paid professions Promise
+ * @returns {Promise<Object[]>} Best paid professions Promise
  * @throws {ArgumentError} if the startDate or endDate are invalid
  */
 async function getBestProfessionsInDateRange(startDate, endDate, limit = 1) {
@@ -43,7 +43,7 @@ async function getBestProfessionsInDateRange(startDate, endDate, limit = 1) {
  * @param {Date} startDate Start date
  * @param {Date} endDate End date
  * @param {Number} limit Number of Clients taken
- * @return {Promise<Object[]>} Best paying clients Profiles
+ * @returns {Promise<Object[]>} Best paying clients Profiles
  * @throws {ArgumentError} if the startDate or endDate are invalid
  */
 async function getBestPayingClientsInDateRange(startDate, endDate, limit = 2) {

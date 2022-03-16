@@ -148,7 +148,7 @@ describe('jobs.js', () => {
 	/**
 	 * Gets job with related Profile models
 	 * @param {Number} jobId Job id
-	 * @return {Promise<Job>} Job Promise
+	 * @returns {Promise<Job>} Job Promise
 	 * @private
 	 */
 	function _getJobWithRelatedProfiles(jobId) {

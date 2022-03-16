@@ -15,7 +15,7 @@ module.exports = asyncMiddleware(async (req, res, next) => {
 			next(httpErrors.unauthorized);
 		}
 
-		//...validateAdminToken(adminToken);
+		// ...validateAdminToken(adminToken);
 
 		next();
 	} catch (e) {

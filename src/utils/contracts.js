@@ -55,6 +55,12 @@ function isNumber(value) {
 	}
 }
 
+/**
+ * Checks if the value is a valid positive Number
+ * @param {*} value The value to check
+ * @throws {ArgumentError} If the value is invalid
+ * @returns {undefined} If the value is valid
+ */
 function isPositiveNumber(value) {
 	isNumber(value);
 

@@ -76,7 +76,7 @@ describe('admin.js', () => {
 
 			const amountsPerProfession = contractsInDateRange.reduce((acc, contract) => {
 				const contractId = contract.id;
-				const profession = contract.Contractor.profession;
+				const { profession } = contract.Contractor;
 
 				acc[profession] = acc[profession] || 0;
 				acc[profession] += amountPaidByContractId[contractId];
@@ -85,7 +85,7 @@ describe('admin.js', () => {
 			}, {});
 
 			const [[expectedProfession, expectedAmountReceived]] = Object.entries(amountsPerProfession)
-				.sort(([professionA, amountA], [professionB, amountB]) => (amountA > amountB) ? -1 : 1);
+				.sort(([_professionA, amountA], [_professionB, amountB]) => (amountA > amountB) ? -1 : 1);
 
 			const { body: bestProfession } = await request(app)
 				.get('/api/admin/best-profession')
@@ -207,6 +207,13 @@ describe('admin.js', () => {
 		});
 	});
 
+	/**
+	 * Gets aggregated earning per Contract id in the provided date range
+	 * @param {Date} startDate Start date
+	 * @param {Date} endDate End date
+	 * @returns {Promise<Object>} aggregated earning per Contract id Promise
+	 * @private
+	 */
 	async function _getEarningsPerContractInDateRange(startDate, endDate) {
 		const earningsPerContract = await Job.findAll({
 			group: ['ContractId'],
