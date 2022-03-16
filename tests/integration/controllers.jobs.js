@@ -97,9 +97,19 @@ describe('jobs.js', () => {
 				.expect(StatusCodes.CONFLICT);
 		});
 
+		it('should not allow to pay if profile belongs to contractor', () => {
+			const jobId = 5;
+			const profileId = 6;
+
+			return request(app)
+				.post(`/api/jobs/${jobId}/pay`)
+				.set(PROFILE_ID_HEADER, profileId)
+				.expect(StatusCodes.UNAUTHORIZED);
+		});
+
 		it('should not allow to pay if client balance is smaller than the job price', () => {
 			const jobId = 5;
-			const profileId = 2;
+			const profileId = 4;
 
 			return request(app)
 				.post(`/api/jobs/${jobId}/pay`)
@@ -109,7 +119,7 @@ describe('jobs.js', () => {
 
 		it('should perform job payment process', async () => {
 			const jobId = 1;
-			const profileId = 2;
+			const profileId = 1;
 
 			const job = await _getJobWithRelatedProfiles(jobId);
 			const jobPrice = job.price;
