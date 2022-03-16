@@ -55,8 +55,9 @@ function getUnpaidJobsTotalAmount(clientId, transaction) {
 			required: true,
 			attributes: []
 		},
-		transaction
-	})
+		transaction,
+		skipLocked: true
+	});
 }
 
 /**
@@ -77,14 +78,16 @@ async function payForJob(jobId, profileId) {
 			include: {
 				model: Contract,
 				include: [{
-						model: Profile,
-						as: 'Client'
+					model: Profile,
+					as: 'Client'
 				}, {
-						model: Profile,
-						as: 'Contractor'
+					model: Profile,
+					as: 'Contractor'
 				}]
 			},
-			transaction
+			transaction,
+			lock: true,
+			skipLocked: true
 		});
 
 		if (!job) {
