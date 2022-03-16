@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const { exists } = require('../utils/contracts');
 const NotFoundError = require('../errors/NotFound');
 const ConflictError = require('../errors/Conflict');
+const UnauthorizedError = require('../errors/Unathorized');
 const contractStatuses = require('../enums/contractStatuses');
 const { Job, Contract, Profile, sequelize } = require('../models/model');
 
@@ -33,6 +34,29 @@ function getUnpaidJobs(profileId) {
 			attributes: []
 		}
 	});
+}
+
+/**
+ * Gets total amount of prices for all profile unpaid jobs as a client
+ * @param {Number} clientId Client id
+ * @param {transaction} transaction Transaction
+ * @return {Promise<Number>} Profile total debt
+ */
+function getUnpaidJobsTotalAmount(clientId, transaction){
+	return Job.sum('price', {
+		include: {
+			model: Contract,
+			where: {
+				status: contractStatuses.IN_PROGRESS,
+				[Op.or]: [
+					{ ClientId: clientId },
+				]
+			},
+			required: true,
+			attributes: []
+		},
+		transaction
+	})
 }
 
 /**
@@ -98,5 +122,6 @@ async function payForJob(jobId, profileId) {
 
 module.exports = {
 	payForJob,
-	getUnpaidJobs
+	getUnpaidJobs,
+	getUnpaidJobsTotalAmount
 };

@@ -43,8 +43,30 @@ function isValidDateRange(start, end) {
 	}
 }
 
+/**
+ * Checks if the value is a valid Number
+ * @param {*} value The value to check
+ * @throws {ArgumentError} If the value is invalid
+ * @returns {undefined} If the value is valid
+ */
+function isNumber(value) {
+	if (!Number.isFinite(value)) {
+		throw new ArgumentError(contractMessages.SHOULD_BE_NUMBER);
+	}
+}
+
+function isPositiveNumber(value) {
+	isNumber(value);
+
+	if (value <= 0) {
+		throw new ArgumentError(contractMessages.SHOULD_BE_POSITIVE_NUMBER);
+	}
+}
+
 module.exports = {
 	exists,
 	isDate,
+	isNumber,
+	isPositiveNumber,
 	isValidDateRange
 };
