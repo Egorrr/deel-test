@@ -139,9 +139,10 @@ Notes:
 
 1. /admin/best-profession and /admin/best-clients counts partially paid jobs and terminated 
    Contracts along with paid ones as per discussion
-2. /balances/deposit/:userId' a weird requirement regarding 25%, can't think of a business meaning of it,
+2. /admin/best-professions if two top professions got equal amountReceived they both should be returned
+3. /balances/deposit/:userId' a weird requirement regarding 25%, can't think of a business meaning of it,
    as per discussion it should be implemented the way it's described in README
-3. /contracts/:id terminated Contract should still be available by id as per discussion
+4. /contracts/:id terminated Contract should still be available by id as per discussion
 
 Possible Improvements
 

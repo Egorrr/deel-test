@@ -6,9 +6,12 @@ const asyncMiddleware = require('../middleware/async');
 const statisticsService = require('../services/statistics');
 
 /**
- * NOTE: Counts partially paid jobs and terminated Contracts along with paid ones as per discussion
+ * NOTE:
+ *      1. Counts partially paid jobs and terminated Contracts along with paid ones as per discussion
+ *      2. If two top professions got equal amountReceived they both should be returned
  *
- * @returns {Object} profession that earned the most money for any contactor that worked in the provided date range
+ * @returns {Object|Object[]} profession or professions that earned the most money
+ * for any contactor that worked in the provided date range
  */
 router.get('/best-profession', validate(validations.getBestProfession), asyncMiddleware(async (req, res) => {
 	const { start, end } = req.query;
@@ -17,9 +20,14 @@ router.get('/best-profession', validate(validations.getBestProfession), asyncMid
 		throw httpsErrors.badRequest;
 	}
 
-	const [bestProfession] = await statisticsService.getBestProfessionsInDateRange(start, end, 1);
+	const result = await statisticsService.getBestProfessionsInDateRange(start, end, 2);
+	const [firstProfession, secondProfession] = result;
 
-	res.send(bestProfession);
+	if (firstProfession.amountReceived === secondProfession.amountReceived) {
+		return res.send(result);
+	}
+
+	return res.send(firstProfession);
 }));
 
 /**
@@ -36,7 +44,7 @@ router.get('/best-clients', validate(validations.getBestPayingClients), asyncMid
 
 	const bestPayingClients = await statisticsService.getBestPayingClientsInDateRange(start, end, limit);
 
-	res.send(bestPayingClients);
+	return res.send(bestPayingClients);
 }));
 
 module.exports = router;
