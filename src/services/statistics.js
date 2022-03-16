@@ -1,6 +1,6 @@
 const { Op, fn, col, literal } = require('sequelize');
+const { Job, Contract, Profile } = require('../models');
 const { isValidDateRange } = require('../utils/contracts');
-const { Job, Contract, Profile } = require('../models/model');
 
 /**
  * Gets professions that earned most in the provided date range

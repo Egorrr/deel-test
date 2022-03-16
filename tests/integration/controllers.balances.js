@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
 const app = require('../../src/app');
-const { Profile } = require('../../src/models/model');
+const { Profile } = require('../../src/models');
 
 const PROFILE_ID_HEADER = 'profile_id';
 

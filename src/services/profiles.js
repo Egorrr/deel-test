@@ -1,4 +1,4 @@
-const { Profile } = require('../models/model');
+const { Profile } = require('../models');
 const { exists } = require('../utils/contracts');
 
 /**

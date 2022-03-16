@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
-const { Contract: Contracts } = require('../models/model');
-const contractStatuses = require('../enums/contractStatuses');
+const { Contract } = require('../models');
 const { exists } = require('../utils/contracts');
+const contractStatuses = require('../enums/contractStatuses');
 
 /**
  * Gets single Contract if it belongs to a provided profileId
@@ -14,7 +14,7 @@ function getProfileContractById(id, profileId) {
 	exists(id);
 	exists(profileId);
 
-	return Contracts.findOne({
+	return Contract.findOne({
 		where: {
 			id,
 			[Op.or]: [
@@ -34,7 +34,7 @@ function getProfileContractById(id, profileId) {
 function getAllActiveProfileContracts(profileId) {
 	exists(profileId)
 
-	return Contracts.findAll({
+	return Contract.findAll({
 		where: {
 			status: { [Op.ne]: contractStatuses.TERMINATED },
 			[Op.or]: [

@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
 const app = require('../../src/app');
-const { Job, Contract, Profile } = require('../../src/models/model');
+const { Job, Contract, Profile } = require('../../src/models');
 const contractStatuses = require('../../src/enums/contractStatuses');
 
 const PROFILE_ID_HEADER = 'profile_id';

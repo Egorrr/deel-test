@@ -1,10 +1,9 @@
-const { Op } = require('sequelize');
 const jobsService = require('./jobs');
-const { exists, isPositiveNumber } = require('../utils/contracts');
 const ConflictError = require('../errors/Conflict');
-const { Contract, Profile, sequelize } = require('../models/model');
+const { Profile, sequelize } = require('../models');
+const { exists, isPositiveNumber } = require('../utils/contracts');
 
-const DEPOSIT_MONEY_MULTIPLIER = 0.25;
+const DEBT_MAX_AMOUNT_MULTIPLIER = 0.25;
 
 /**
  * Deposits money into the balance of a client, a client can't deposit more than 25% his total of jobs to pay
@@ -22,7 +21,7 @@ async function depositMoney(profileId, amount) {
 
 	try {
 		const currentDebt = await jobsService.getUnpaidJobsTotalAmount(profileId, transaction);
-		const maxDepositAmount = currentDebt * DEPOSIT_MONEY_MULTIPLIER;
+		const maxDepositAmount = currentDebt * DEBT_MAX_AMOUNT_MULTIPLIER;
 
 		if (amount > maxDepositAmount) {
 			throw new ConflictError('Amount should not exceed 25% of profile debt');

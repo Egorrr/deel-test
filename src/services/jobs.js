@@ -4,7 +4,7 @@ const NotFoundError = require('../errors/NotFound');
 const ConflictError = require('../errors/Conflict');
 const UnauthorizedError = require('../errors/Unathorized');
 const contractStatuses = require('../enums/contractStatuses');
-const { Job, Contract, Profile, sequelize } = require('../models/model');
+const { Job, Contract, Profile, sequelize } = require('../models');
 
 const BALANCE_PROPERTY_NAME = 'balance';
 

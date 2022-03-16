@@ -1,9 +1,9 @@
 const { assert } = require('chai');
 const request = require('supertest');
-const { Op, literal, fn, col } = require('sequelize');
 const { StatusCodes } = require('http-status-codes');
+const { Op, literal, fn, col } = require('sequelize');
 const app = require('../../src/app');
-const { Job, Contract, Profile } = require('../../src/models/model');
+const { Job, Contract, Profile } = require('../../src/models');
 
 const ADMIN_TOKEN_HEADER = 'admin_key';
 const ADMIN_TOKEN = 123;
