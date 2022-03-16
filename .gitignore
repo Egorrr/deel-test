@@ -3,3 +3,4 @@ node_modules
 database.sqlite3
 test-database.sqlite3
 .eslintcache
+/.nyc_output
