@@ -1,8 +1,9 @@
+const logger = require('../utils/logger');
 const { toHttpError } = require('../mappers/error');
 
 module.exports = function() {
 	return (e, req, res, _next) => {
-		console.log(e);
+		logger.error(e);
 
 		const error = toHttpError(e);
 
