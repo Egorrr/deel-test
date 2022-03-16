@@ -1,6 +1,33 @@
 # DEEL BACKEND TASK
 
-  
+
+## Assumptions:
+
+1. /jobs/:jobId/pay
+   1. Only client type Profile can pay for Job.
+   2. Client can only pay for the Jobs that he own
+2. /balances/deposit/:userId
+   1. Only client type Profile can deposit money
+   2. Client can only deposit on his account
+3. /admin/... Admin endpoint should be additionally protected and regular Profile can't have access to it
+
+## Notes:
+
+1. /admin/best-profession and /admin/best-clients counts partially paid jobs and terminated
+   Contracts along with paid ones as per discussion
+2. /admin/best-professions if two top professions got equal amountReceived they both should be returned
+3. /balances/deposit/:userId' a weird requirement regarding 25%, can't think of a business meaning of it,
+   as per discussion it should be implemented the way it's described in README
+4. /contracts/:id terminated Contract should still be available by id as per discussion
+
+## Possible Improvements
+
+1. Add proper seeds
+2. Put all the error strings to dictionaries
+3. Add proper database setup for integration tests, so that every test can preset specific required data for testing corner cases
+4. Cover services with proper unit tests
+5. Precalculate and cache/store in db results for /admin/... statistic endpoints so that it won't calculate on every request
+
 
 💫 Welcome! 🎉
 
@@ -124,30 +151,3 @@ When you have finished the assignment, create a github repository and send us th
   
 
 Thank you and good luck! 🙏
-
-Assumptions:
-
-1. /jobs/:jobId/pay
-   1. Only client type Profile can pay for Job.
-   2. Client can only pay for the Jobs that he own
-2. /balances/deposit/:userId
-   1. Only client type Profile can deposit money
-   2. Client can only deposit on his account
-3. /admin/... Admin endpoint should be additionally protected and regular Profile can't have access to it
-
-Notes:
-
-1. /admin/best-profession and /admin/best-clients counts partially paid jobs and terminated 
-   Contracts along with paid ones as per discussion
-2. /admin/best-professions if two top professions got equal amountReceived they both should be returned
-3. /balances/deposit/:userId' a weird requirement regarding 25%, can't think of a business meaning of it,
-   as per discussion it should be implemented the way it's described in README
-4. /contracts/:id terminated Contract should still be available by id as per discussion
-
-Possible Improvements
-
-1. Add proper seeds
-2. Put all the error strings to dictionaries
-3. Add proper database setup for integration tests, so that every test can preset specific required data for testing corner cases
-4. Cover services with proper unit tests
-5. Precalculate and cache/store in db results for /admin/... statistic endpoints so that it won't calculate on every request
