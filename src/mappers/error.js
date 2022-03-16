@@ -5,7 +5,9 @@ const errorMessages = require('../resources/errorMessages');
 const DEFAULT_ERROR_MESSAGE = errorMessages.UNEXPECTED_ERROR;
 const DEFAULT_ERROR_STATUS = StatusCodes.INTERNAL_SERVER_ERROR;
 const ERRORS_HTTP_STATUS_MAP = Object.freeze({
-	ValidationError: StatusCodes.BAD_REQUEST
+	ValidationError: StatusCodes.BAD_REQUEST,
+	NotFoundError: StatusCodes.NOT_FOUND,
+	ConflictError: StatusCodes.CONFLICT
 });
 
 /**

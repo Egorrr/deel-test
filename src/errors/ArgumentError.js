@@ -8,6 +8,8 @@ class ArgumentError extends ApplicationError {
 	 */
 	constructor(message = errorMessages.ARGUMENT) {
 		super(message);
+
+		this.name = this.constructor.name;
 	}
 }
 
