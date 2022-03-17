@@ -17,22 +17,26 @@ const BALANCE_PROPERTY_NAME = 'balance';
 function getUnpaidJobs(profileId) {
 	exists(profileId);
 
-	return Job.findAll({
-		where: {
-			paid: false
-		},
-		include: {
-			model: Contract,
+	return sequelize.transaction((transaction) => {
+		return Job.findAll({
 			where: {
-				status: contractStatuses.IN_PROGRESS,
-				[Op.or]: [
-					{ ClientId: profileId },
-					{ ContractorId: profileId }
-				]
+				paid: false
 			},
-			required: true,
-			attributes: []
-		}
+			include: {
+				model: Contract,
+				where: {
+					status: contractStatuses.IN_PROGRESS,
+					[Op.or]: [
+						{ ClientId: profileId },
+						{ ContractorId: profileId }
+					]
+				},
+				required: true,
+				attributes: []
+			},
+			transaction,
+			skipLocked: true
+		});
 	});
 }
 

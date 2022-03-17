@@ -1,5 +1,5 @@
 const express = require('express');
-const responseTime = require('response-time')
+const responseTime = require('response-time');
 const controllers = require('./controllers');
 const errorHandler = require('./middleware/errorHandler');
 
