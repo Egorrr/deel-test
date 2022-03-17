@@ -4,11 +4,11 @@
 ## Assumptions:
 
 1. /jobs/:jobId/pay
-   1. Only client type Profile can pay for Job.
-   2. Client can only pay for the Jobs that he own
+   1. Only Client type Profile can pay for Job.
+   2. Clients can only pay for the Jobs that they own
 2. /balances/deposit/:userId
-   1. Only client type Profile can deposit money
-   2. Client can only deposit on his account
+   1. Only Client type Profile can deposit money
+   2. Clients can only deposit on their account
 3. /admin/... Admin endpoint should be additionally protected and regular Profile can't have access to it
 
 ## Notes:
